@@ -1,7 +1,6 @@
 let n=50;
 let boxSize = 500/n
 let boxWidth = 500/n*n;
-var hue = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
 
 document.querySelector(".container").style.width = boxWidth;
 document.querySelector(".container").style.height = "500px";
@@ -33,9 +32,15 @@ function squareSize(){
 function hover(purple){ 
   let hover = document.querySelectorAll(".gridsquare");
   for (i=0;i<hover.length;i++){
-    hover[i].addEventListener("mouseenter", function(each) { 
-      each.target.style.background = purple;
-    });
+    if (purple == "hue"){
+      hover[i].addEventListener("mouseenter", function(each) { 
+        each.target.style.background = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+      });
+    }
+    else
+      hover[i].addEventListener("mouseenter", function(each) { 
+        each.target.style.background = purple;
+      });
   }
 }
 
@@ -43,7 +48,7 @@ function clearGrid(){
   let hover = document.querySelectorAll(".gridsquare");
   for (i=0;i<hover.length;i++){
     hover[i].remove()};
-    n = window.prompt("Enter grid density. 1-100")
+    n = window.prompt("Enter amount of squares per side. 1-100")
     boxSize = 500/n
     boxWidth = 500/n*n;
     grid()
@@ -54,21 +59,14 @@ function clearGrid(){
     button.addEventListener("click", clearGrid);
   }
 
+  let orange = document.getElementById('one');
+  orange.addEventListener('click', function(){ hover("orange")},false);
+  
+  let red = document.getElementById('two');
+  red.addEventListener('click', function(){ hover("red")},false);
 
-    let orange = document.getElementById('one');
-    orange.addEventListener('click', function(){ hover("orange")},false);
-    
-    let red = document.getElementById('two');
-    red.addEventListener('click', function(){ hover("red")},false);
+  let rand = document.getElementById('three');
+  rand.addEventListener('click', function(){ hover("hue")},false);
 
-    let rand = document.getElementById('three');
-    rand.addEventListener('click', function(){ hover(hue)},false);
-
-
-function randColor(){
-    let all = document.querySelectorAll(".gridsquare");
-    for(i=0;i<all.length;i++){
-}
-}
   grid()
   buttonListen()
